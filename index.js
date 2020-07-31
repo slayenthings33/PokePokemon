@@ -12,6 +12,7 @@
 // let pokePic = document.getElementById("pokePic");
 // let pokeAbilities = document.getElementById("pokeAbilities");
 // let pokeName = document.getElementById("pokeName");
+let pokeContainer = document.getElementById("pokeContainer");
 
 
 fetch("https://pokeapi.co/api/v2/pokemon/?limit=151").then((response)=>
@@ -26,10 +27,12 @@ response.json()).then((pokeData) => {
                 <div class=pokeBall>    
                 <p id="pokeName">${pokemon.name}</p>
                 <img id="pokePic" src="${pokemon.sprites.front_default}" alt="">
-                <p id="pokeAbilities" src= "" ></p>
+                <p id="pokeAbilities" ><b>Abilities:</b> ${pokemon.abilities.map(ability => {
+                    return (ability.ability.name)
+                }).join(", ")} </p>
                 </div>
             `;
-            console.log(pokemon.abilities)
+            // console.log(pokemon.abilities)
             
             
             document.getElementById("pokeContainer").innerHTML += carta;
@@ -52,5 +55,6 @@ response.json()).then((pokeData) => {
 //     }
 // }
 
-
-// let name = pokeData.results[i].name;
+fetch("https://pokeapi.co/api/v2/ability/?limit=20&offset=20").then((response)=>
+response.json()).then((pokeData) => {console.log(pokeData)
+    console.log(pokeData.results.map((data)=> data.url))})
